@@ -1,76 +1,100 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game-Zone | Gaming Servers</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game-Zone | Top Jocuri Online</title>
+  <meta name="description" content="Game-Zone - top jocuri online, clasamente, categorii și voturi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<header>
-  <a class="logo" href="#">GAME<span>-ZONE</span></a>
-  <nav>
-    <a href="#home">Acasă</a>
-    <a href="#games">Jocuri</a>
-    <a href="#servers">Servere</a>
-    <a href="#ranking">Clasament</a>
-  </nav>
-  <button class="login">LOGIN</button>
-</header>
+  <header class="topbar">
+    <a class="brand" href="#home">GAME<span>-ZONE</span></a>
+    <nav>
+      <a href="#top">Top jocuri</a>
+      <a href="#categorii">Categorii</a>
+      <a href="#servere">Servere</a>
+      <a href="#despre">Despre</a>
+    </nav>
+    <div class="account-actions"><a class="register-link" href="register.html">Înregistrare</a><button class="login-btn" id="loginBtn">Conectare</button></div>
+  </header>
 
-<main>
-<section id="home" class="hero">
-  <div class="hero-content">
-    <div class="badge">● PLATFORMĂ GAMING</div>
-    <h1>INTRĂ ÎN <span>GAME-ZONE</span></h1>
-    <p>Descoperă jocuri, servere online și comunități de gaming într-un singur loc.</p>
-    <div class="hero-buttons">
-      <a class="btn primary" href="#servers">VEZI SERVERELE</a>
-      <a class="btn secondary" href="#games">DESCOPERĂ JOCURILE</a>
+  <main id="home">
+    <section class="hero">
+      <div class="hero-content">
+        <span class="eyebrow">TOP GAMING ROMÂNIA</span>
+        <h1>Descoperă cele mai tari <span>jocuri online</span></h1>
+        <p>Votează jocurile preferate, vezi clasamentul comunității și găsește rapid jocuri FPS, MMORPG, MOBA, Battle Royale și multe altele.</p>
+        <div class="hero-actions">
+          <a class="primary" href="#top">Vezi clasamentul</a>
+          <a class="secondary" href="#categorii">Explorează categorii</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="rank-badge">#1</div>
+        <div>
+          <small>Jocul săptămânii</small>
+          <h2>Counter-Strike 2</h2>
+          <p>FPS competitiv • Valve</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div><strong>50+</strong><span>Jocuri listate</span></div>
+      <div><strong>8</strong><span>Categorii</span></div>
+      <div><strong id="totalVotes">12.480</strong><span>Voturi comunitate</span></div>
+      <div><strong>24/7</strong><span>Top actualizat</span></div>
+    </section>
+
+    <section class="section" id="top">
+      <div class="section-head">
+        <div><span class="eyebrow">CLASAMENT</span><h2>Top jocuri online</h2></div>
+        <input id="searchInput" class="search" type="search" placeholder="Caută un joc..." />
+      </div>
+      <div id="gameGrid" class="game-grid"></div>
+    </section>
+
+    <section class="section" id="categorii">
+      <div class="section-head"><div><span class="eyebrow">GENURI</span><h2>Categorii populare</h2></div></div>
+      <div class="category-grid" id="categoryGrid"></div>
+    </section>
+
+    <section class="section" id="servere">
+      <div class="section-head"><div><span class="eyebrow">SERVER LIST</span><h2>Servere recomandate</h2></div></div>
+      <div class="server-list">
+        <article><div><span class="online-dot"></span><strong>CS2 Arena Romania</strong><small>Counter-Strike 2</small></div><span>128/128</span><button onclick="copyIP('play.game-zone.ro:27015')">Copiază IP</button></article>
+        <article><div><span class="online-dot"></span><strong>Old School Public</strong><small>Counter-Strike 1.6</small></div><span>29/32</span><button onclick="copyIP('cs.game-zone.ro:27015')">Copiază IP</button></article>
+        <article><div><span class="online-dot"></span><strong>Metin2 Legends</strong><small>Metin2</small></div><span>842 online</span><button onclick="copyIP('metin.game-zone.ro')">Copiază adresă</button></article>
+      </div>
+    </section>
+
+    <section class="section about" id="despre">
+      <span class="eyebrow">GAME-ZONE</span>
+      <h2>Un singur loc pentru comunitatea de gaming</h2>
+      <p>Game-Zone este construit ca portal pentru topuri de jocuri, servere online, voturi și descoperirea jocurilor preferate de comunitate.</p>
+    </section>
+  </main>
+
+  <footer>© 2026 Game-Zone • Top jocuri online</footer>
+
+  <div class="toast" id="toast">Copiat!</div>
+
+  <div class="modal" id="loginModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="close" id="closeModal">×</button>
+      <span class="eyebrow">CONT GAME-ZONE</span>
+      <h2>Conectare</h2>
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Parolă" />
+      <button class="primary full" id="demoLogin">Intră în cont</button>
+      <p class="auth-switch">Nu ai cont? <a href="register.html">Creează unul acum</a></p><p class="muted">Demo vizual. Conectarea reală se poate lega ulterior la Supabase.</p>
     </div>
   </div>
-  <div class="hero-art">
-    <div class="orb"></div>
-    <div class="hero-card"><b>LIVE</b><strong>SERVERE ONLINE</strong><small>Game-Zone Network</small></div>
-  </div>
-</section>
 
-<section id="games" class="section">
-  <div class="section-head"><div><span>GAME LIBRARY</span><h2>Jocuri populare</h2></div></div>
-  <div class="games-grid">
-    <article class="game-card"><div class="game-icon">CS2</div><h3>Counter-Strike 2</h3><p>FPS competitiv</p><button onclick="filterGame('CS2')">VEZI SERVERE</button></article>
-    <article class="game-card"><div class="game-icon cs16">1.6</div><h3>Counter-Strike 1.6</h3><p>Clasicul FPS</p><button onclick="filterGame('CS 1.6')">VEZI SERVERE</button></article>
-    <article class="game-card"><div class="game-icon gta">GTA</div><h3>GTA V</h3><p>Open world / RP</p><button onclick="filterGame('GTA V')">VEZI SERVERE</button></article>
-    <article class="game-card"><div class="game-icon dota">DOTA</div><h3>DOTA 2</h3><p>MOBA competitiv</p><button onclick="filterGame('DOTA 2')">VEZI SERVERE</button></article>
-    <article class="game-card"><div class="game-icon delta">DF</div><h3>Delta Force</h3><p>FPS tactic</p><button onclick="filterGame('Delta Force')">VEZI SERVERE</button></article>
-    <article class="game-card"><div class="game-icon metin">M2</div><h3>Metin2</h3><p>MMORPG</p><button onclick="filterGame('Metin2')">VEZI SERVERE</button></article>
-  </div>
-</section>
-
-<section id="servers" class="section servers">
-  <div class="section-head"><div><span>LIVE NETWORK</span><h2>Servere online</h2></div><div id="serverCount" class="online-count">● 6 servere</div></div>
-  <div class="filters">
-    <input id="search" placeholder="Caută server, IP sau joc..." oninput="renderServers()">
-    <select id="gameFilter" onchange="renderServers()">
-      <option value="all">Toate jocurile</option>
-      <option>CS2</option><option>CS 1.6</option><option>GTA V</option>
-      <option>DOTA 2</option><option>Delta Force</option><option>Metin2</option>
-    </select>
-  </div>
-  <div id="serverList" class="server-list"></div>
-</section>
-
-<section id="ranking" class="section ranking">
-  <div class="section-head"><div><span>TOP PLAYERS</span><h2>Clasament</h2></div></div>
-  <div class="rank-list">
-    <div><b>#1</b><strong>ShadowX</strong><span>2,480 XP</span></div>
-    <div><b>#2</b><strong>Robby</strong><span>2,210 XP</span></div>
-    <div><b>#3</b><strong>DragonFire</strong><span>1,980 XP</span></div>
-  </div>
-</section>
-</main>
-
-<footer><strong>GAME-ZONE</strong><span>Gaming • Servers • Community</span><small>© 2026 Game-Zone</small></footer>
-<script src="script.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

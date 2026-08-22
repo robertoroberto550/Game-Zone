@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Înregistrare | Game-Zone</title>
+  <meta name="description" content="Creează un cont Game-Zone." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">GAME<span>-ZONE</span></a>
+    <nav>
+      <a href="index.html#top">Top jocuri</a>
+      <a href="index.html#categorii">Categorii</a>
+      <a href="index.html#servere">Servere</a>
+      <a href="index.html#despre">Despre</a>
+    </nav>
+    <a class="login-btn" href="index.html">Înapoi la site</a>
+  </header>
+
+  <main class="auth-page">
+    <section class="auth-card">
+      <span class="eyebrow">CONT GAME-ZONE</span>
+      <h1>Creează cont</h1>
+      <p class="auth-intro">Înregistrează-te pentru a vota jocurile preferate și pentru a folosi funcțiile comunității.</p>
+
+      <form id="registerForm" novalidate>
+        <label for="username">Nume de utilizator</label>
+        <input id="username" name="username" type="text" minlength="3" maxlength="24" autocomplete="username" placeholder="Ex: Gamer96" required />
+
+        <label for="email">Adresă de email</label>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="nume@email.com" required />
+
+        <label for="password">Parolă</label>
+        <div class="password-wrap">
+          <input id="password" name="password" type="password" minlength="8" autocomplete="new-password" placeholder="Minimum 8 caractere" required />
+          <button class="show-password" type="button" data-target="password">Arată</button>
+        </div>
+
+        <label for="confirmPassword">Confirmă parola</label>
+        <div class="password-wrap">
+          <input id="confirmPassword" name="confirmPassword" type="password" minlength="8" autocomplete="new-password" placeholder="Repetă parola" required />
+          <button class="show-password" type="button" data-target="confirmPassword">Arată</button>
+        </div>
+
+        <label class="terms-row">
+          <input id="terms" type="checkbox" required />
+          <span>Sunt de acord cu termenii și regulile comunității Game-Zone.</span>
+        </label>
+
+        <p class="form-message" id="formMessage" aria-live="polite"></p>
+        <button class="primary full auth-submit" type="submit">Creează cont</button>
+      </form>
+
+      <p class="auth-switch">Ai deja cont? <a href="index.html#login">Conectează-te</a></p>
+      <p class="muted">Această versiune validează formularul în browser. Crearea reală a contului poate fi conectată la Supabase.</p>
+    </section>
+  </main>
+
+  <footer>© 2026 Game-Zone • Top jocuri online</footer>
+  <div class="toast" id="toast">Gata!</div>
+  <script src="register.js"></script>
+</body>
+</html>
