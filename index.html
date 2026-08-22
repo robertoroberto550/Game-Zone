@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game-Zone | Gaming Servers</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="logo" href="#">GAME<span>-ZONE</span></a>
+  <nav>
+    <a href="#home">Acasă</a>
+    <a href="#games">Jocuri</a>
+    <a href="#servers">Servere</a>
+    <a href="#ranking">Clasament</a>
+  </nav>
+  <button class="login">LOGIN</button>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="hero-content">
+    <div class="badge">● PLATFORMĂ GAMING</div>
+    <h1>INTRĂ ÎN <span>GAME-ZONE</span></h1>
+    <p>Descoperă jocuri, servere online și comunități de gaming într-un singur loc.</p>
+    <div class="hero-buttons">
+      <a class="btn primary" href="#servers">VEZI SERVERELE</a>
+      <a class="btn secondary" href="#games">DESCOPERĂ JOCURILE</a>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="orb"></div>
+    <div class="hero-card"><b>LIVE</b><strong>SERVERE ONLINE</strong><small>Game-Zone Network</small></div>
+  </div>
+</section>
+
+<section id="games" class="section">
+  <div class="section-head"><div><span>GAME LIBRARY</span><h2>Jocuri populare</h2></div></div>
+  <div class="games-grid">
+    <article class="game-card"><div class="game-icon">CS2</div><h3>Counter-Strike 2</h3><p>FPS competitiv</p><button onclick="filterGame('CS2')">VEZI SERVERE</button></article>
+    <article class="game-card"><div class="game-icon cs16">1.6</div><h3>Counter-Strike 1.6</h3><p>Clasicul FPS</p><button onclick="filterGame('CS 1.6')">VEZI SERVERE</button></article>
+    <article class="game-card"><div class="game-icon gta">GTA</div><h3>GTA V</h3><p>Open world / RP</p><button onclick="filterGame('GTA V')">VEZI SERVERE</button></article>
+    <article class="game-card"><div class="game-icon dota">DOTA</div><h3>DOTA 2</h3><p>MOBA competitiv</p><button onclick="filterGame('DOTA 2')">VEZI SERVERE</button></article>
+    <article class="game-card"><div class="game-icon delta">DF</div><h3>Delta Force</h3><p>FPS tactic</p><button onclick="filterGame('Delta Force')">VEZI SERVERE</button></article>
+    <article class="game-card"><div class="game-icon metin">M2</div><h3>Metin2</h3><p>MMORPG</p><button onclick="filterGame('Metin2')">VEZI SERVERE</button></article>
+  </div>
+</section>
+
+<section id="servers" class="section servers">
+  <div class="section-head"><div><span>LIVE NETWORK</span><h2>Servere online</h2></div><div id="serverCount" class="online-count">● 6 servere</div></div>
+  <div class="filters">
+    <input id="search" placeholder="Caută server, IP sau joc..." oninput="renderServers()">
+    <select id="gameFilter" onchange="renderServers()">
+      <option value="all">Toate jocurile</option>
+      <option>CS2</option><option>CS 1.6</option><option>GTA V</option>
+      <option>DOTA 2</option><option>Delta Force</option><option>Metin2</option>
+    </select>
+  </div>
+  <div id="serverList" class="server-list"></div>
+</section>
+
+<section id="ranking" class="section ranking">
+  <div class="section-head"><div><span>TOP PLAYERS</span><h2>Clasament</h2></div></div>
+  <div class="rank-list">
+    <div><b>#1</b><strong>ShadowX</strong><span>2,480 XP</span></div>
+    <div><b>#2</b><strong>Robby</strong><span>2,210 XP</span></div>
+    <div><b>#3</b><strong>DragonFire</strong><span>1,980 XP</span></div>
+  </div>
+</section>
+</main>
+
+<footer><strong>GAME-ZONE</strong><span>Gaming • Servers • Community</span><small>© 2026 Game-Zone</small></footer>
+<script src="script.js"></script>
+</body>
+</html>
