@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Portal - Autentificare</title>
+    <style>
+        /* --- Stiluri Generale (Gaming/Dark Theme) --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c1b 0%, #201a30 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: rgba(25, 20, 38, 0.95);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-bottom: 22px;
+            color: #8b8599;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-home:hover { color: #00ffcc; }
+
+        /* --- Navigare între Conectare și Înregistrare --- */
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #33294a;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #8b8599;
+            transition: 0.3s;
+        }
+
+        .tab.active, .tab:hover {
+            color: #00ffcc;
+            border-bottom: 2px solid #00ffcc;
+            margin-bottom: -2px;
+        }
+
+        /* --- Structura Formularelor --- */
+        .form-panel {
+            display: none;
+        }
+
+        .form-panel.active {
+            display: block;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #b3aebf;
+        }
+
+        .input-group input[type="text"],
+        .input-group input[type="email"],
+        .input-group input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            background: #1a1526;
+            border: 1px solid #443863;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #00ffcc;
+            box-shadow: 0 0 8px rgba(0, 255, 204, 0.2);
+        }
+
+        /* --- Opțiuni Suplimentare (Remember me / Forgot pass) --- */
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #b3aebf;
+        }
+
+        .form-options a {
+            color: #00ffcc;
+            text-decoration: none;
+        }
+
+        .form-options a:hover {
+            text-decoration: underline;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        /* --- Butoane --- */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: #00ffcc;
+            color: #0f0c1b;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #00ccaa;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+        }
+
+        /* --- Autentificare Socială (Butoane Rapide) --- */
+        .social-login {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .social-login p {
+            font-size: 13px;
+            color: #8b8599;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-social {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #443863;
+            background: #1a1526;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .btn-social:hover {
+            background: #251e36;
+            border-color: #8b8599;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a class="back-home" href="index.html">← Înapoi la NEXUS GAMING</a>
+    <!-- Tab-uri de comutare -->
+    <div class="tabs">
+        <div class="tab active" onclick="switchForm('login')">Conectare</div>
+        <div class="tab" onclick="switchForm('register')">Creare Cont</div>
+    </div>
+
+    <!-- PANOU CONECTARE -->
+    <div id="login-panel" class="form-panel active">
+        <h2>Bun venit înapoi!</h2>
+        <form action="#" method="POST">
+            <div class="input-group">
+                <label for="login-username">Utilizator sau Email</label>
+                <input type="text" id="login-username" required autocomplete="username">
+            </div>
+            <div class="input-group">
+                <label for="login-password">Parolă</label>
+                <input type="password" id="login-password" required autocomplete="current-password">
+            </div>
+            <div class="form-options">
+                <label class="checkbox-container">
+                    <input type="checkbox"> Ține-mă minte
+                </label>
+                <a href="#">Ai uitat parola?</a>
+            </div>
+            <button type="submit" class="btn-submit">LOG IN</button>
+        </form>
+    </div>
+
+    <!-- PANOU ÎNREGISTRARE -->
+    <div id="register-panel" class="form-panel">
+        <h2>Alătură-te comunității</h2>
+        <form action="#" method="POST">
+            <div class="input-group">
+                <label for="reg-username">Nume Utilizator</label>
+                <input type="text" id="reg-username" required autocomplete="username">
+            </div>
+            <div class="input-group">
+                <label for="reg-email">Adresă de Email</label>
+                <input type="email" id="reg-email" required autocomplete="email">
+            </div>
+            <div class="input-group">
+                <label for="reg-password">Parolă</label>
+                <input type="password" id="reg-password" required autocomplete="new-password">
+            </div>
+            <div class="form-options">
+                <label class="checkbox-container">
+                    <input type="checkbox" required> Accept Termenii și GDPR
+                </label>
+            </div>
+            <button type="submit" class="btn-submit">CREEAZĂ CONT</button>
+        </form>
+    </div>
+
+    <!-- Autentificare Socială Comună -->
+    <div class="social-login">
+        <p>sau conectează-te cu</p>
+        <div class="social-buttons">
+            <button class="btn-social">Discord</button>
+            <button class="btn-social">Steam</button>
+            <button class="btn-social">Google</button>
+        </div>
+    </div>
+</div>
+
+<!-- Script simplu pentru schimbarea formularelor -->
+<script>
+    function switchForm(type) {
+        const loginPanel = document.getElementById('login-panel');
+        const registerPanel = document.getElementById('register-panel');
+        const tabs = document.querySelectorAll('.tab');
+
+        if (type === 'login') {
+            loginPanel.classList.add('active');
+            registerPanel.classList.remove('active');
+            tabs[0].classList.add('active');
+            tabs[1].classList.remove('active');
+        } else {
+            registerPanel.classList.add('active');
+            loginPanel.classList.remove('active');
+            tabs[1].classList.add('active');
+            tabs[0].classList.remove('active');
+        }
+    }
+
+    if (window.location.hash === '#register') {
+        switchForm('register');
+    }
+
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            alert('Interfața este pregătită. Conectarea reală va fi activată ulterior.');
+        });
+    });
+</script>
+
+</body>
+</html>
+
