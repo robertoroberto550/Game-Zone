@@ -45,13 +45,19 @@ function database(): PDO
         return $pdo;
     }
 
-    $host = getenv('DB_HOST') ?: '127.0.0.1';
-    $port = getenv('DB_PORT') ?: '3306';
-    $name = getenv('DB_NAME') ?: 'nexus_gaming';
-    $user = getenv('DB_USER') ?: '';
-    $pass = getenv('DB_PASS') ?: '';
+    $localConfigFile = __DIR__ . '/config.local.php';
+    $localConfig = is_file($localConfigFile) ? require $localConfigFile : [];
+    if (!is_array($localConfig)) {
+        $localConfig = [];
+    }
 
-    if ($user === '') {
+    $host = (string) ($localConfig['host'] ?? getenv('DB_HOST') ?: '');
+    $port = (string) ($localConfig['port'] ?? getenv('DB_PORT') ?: '3306');
+    $name = (string) ($localConfig['name'] ?? getenv('DB_NAME') ?: '');
+    $user = (string) ($localConfig['user'] ?? getenv('DB_USER') ?: '');
+    $pass = (string) ($localConfig['pass'] ?? getenv('DB_PASS') ?: '');
+
+    if ($host === '' || $name === '' || $user === '' || $pass === '') {
         respond(['success' => false, 'message' => 'Baza de date nu este configurată.'], 503);
     }
 

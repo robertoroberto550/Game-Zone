@@ -1,9 +1,3 @@
-CREATE DATABASE IF NOT EXISTS nexus_gaming
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
-
-USE nexus_gaming;
-
 CREATE TABLE IF NOT EXISTS users (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   username VARCHAR(24) NOT NULL,

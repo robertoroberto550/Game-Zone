@@ -1,0 +1,12 @@
+<?php
+// Copiază acest fișier ca „config.local.php” și completează valorile
+// afișate în InfinityFree → Control Panel → MySQL Databases.
+// Nu încărca niciodată config.local.php pe GitHub.
+
+return [
+    'host' => 'sqlXXX.infinityfree.com',
+    'port' => '3306',
+    'name' => 'if0_XXXXXXXX_nexus',
+    'user' => 'if0_XXXXXXXX',
+    'pass' => 'PAROLA_CONTULUI_DE_HOSTING',
+];
