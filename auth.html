@@ -189,6 +189,20 @@
             background: #251e36;
             border-color: #8b8599;
         }
+
+        .form-message {
+            display: none;
+            margin: 0 0 18px;
+            padding: 11px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .form-message.show { display: block; }
+        .form-message.error { color: #ffb4b4; background: rgba(255, 70, 70, .12); border: 1px solid rgba(255, 70, 70, .3); }
+        .form-message.success { color: #00ffcc; background: rgba(0, 255, 204, .08); border: 1px solid rgba(0, 255, 204, .25); }
+        .btn-submit:disabled { opacity: .6; cursor: wait; }
     </style>
 </head>
 <body>
@@ -204,14 +218,15 @@
     <!-- PANOU CONECTARE -->
     <div id="login-panel" class="form-panel active">
         <h2>Bun venit înapoi!</h2>
-        <form action="#" method="POST">
+        <div class="form-message" id="login-message" role="status"></div>
+        <form id="login-form">
             <div class="input-group">
                 <label for="login-username">Utilizator sau Email</label>
-                <input type="text" id="login-username" required autocomplete="username">
+                <input type="text" id="login-username" name="identity" required autocomplete="username">
             </div>
             <div class="input-group">
                 <label for="login-password">Parolă</label>
-                <input type="password" id="login-password" required autocomplete="current-password">
+                <input type="password" id="login-password" name="password" required autocomplete="current-password">
             </div>
             <div class="form-options">
                 <label class="checkbox-container">
@@ -226,18 +241,19 @@
     <!-- PANOU ÎNREGISTRARE -->
     <div id="register-panel" class="form-panel">
         <h2>Alătură-te comunității</h2>
-        <form action="#" method="POST">
+        <div class="form-message" id="register-message" role="status"></div>
+        <form id="register-form">
             <div class="input-group">
                 <label for="reg-username">Nume Utilizator</label>
-                <input type="text" id="reg-username" required autocomplete="username">
+                <input type="text" id="reg-username" name="username" minlength="3" maxlength="24" pattern="[a-zA-Z0-9_]+" required autocomplete="username">
             </div>
             <div class="input-group">
                 <label for="reg-email">Adresă de Email</label>
-                <input type="email" id="reg-email" required autocomplete="email">
+                <input type="email" id="reg-email" name="email" maxlength="190" required autocomplete="email">
             </div>
             <div class="input-group">
                 <label for="reg-password">Parolă</label>
-                <input type="password" id="reg-password" required autocomplete="new-password">
+                <input type="password" id="reg-password" name="password" minlength="8" maxlength="72" required autocomplete="new-password">
             </div>
             <div class="form-options">
                 <label class="checkbox-container">
@@ -283,14 +299,63 @@
         switchForm('register');
     }
 
-    document.querySelectorAll('form').forEach(form => {
-        form.addEventListener('submit', event => {
-            event.preventDefault();
-            alert('Interfața este pregătită. Conectarea reală va fi activată ulterior.');
-        });
+    let csrfToken = '';
+
+    async function loadCsrfToken() {
+        const response = await fetch('api/csrf.php', { credentials: 'same-origin' });
+        const data = await response.json();
+        if (!response.ok || !data.csrf_token) throw new Error('Conexiunea nu este disponibilă.');
+        csrfToken = data.csrf_token;
+    }
+
+    function showMessage(id, message, success = false) {
+        const element = document.getElementById(id);
+        element.textContent = message;
+        element.className = `form-message show ${success ? 'success' : 'error'}`;
+    }
+
+    async function submitForm(form, endpoint, messageId) {
+        const button = form.querySelector('.btn-submit');
+        button.disabled = true;
+        const originalText = button.textContent;
+        button.textContent = 'SE PROCESEAZĂ...';
+        try {
+            if (!csrfToken) await loadCsrfToken();
+            const payload = Object.fromEntries(new FormData(form));
+            payload.csrf_token = csrfToken;
+            const response = await fetch(`api/${endpoint}.php`, {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message || 'A apărut o eroare.');
+            showMessage(messageId, data.message, true);
+            form.reset();
+            setTimeout(() => window.location.href = 'index.html', 900);
+        } catch (error) {
+            showMessage(messageId, error.message);
+        } finally {
+            button.disabled = false;
+            button.textContent = originalText;
+        }
+    }
+
+    document.getElementById('login-form').addEventListener('submit', event => {
+        event.preventDefault();
+        submitForm(event.currentTarget, 'login', 'login-message');
+    });
+
+    document.getElementById('register-form').addEventListener('submit', event => {
+        event.preventDefault();
+        submitForm(event.currentTarget, 'register', 'register-message');
+    });
+
+    loadCsrfToken().catch(() => {
+        showMessage('login-message', 'Serverul PHP nu este configurat momentan.');
     });
 </script>
 
 </body>
 </html>
-
