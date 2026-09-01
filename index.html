@@ -1,100 +1,84 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Game-Zone | Top Jocuri Online</title>
-  <meta name="description" content="Game-Zone - top jocuri online, clasamente, categorii și voturi." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070711">
+  <meta name="description" content="NEXUS GAMING — comunitatea românească pentru jocuri, servere și competiție.">
+  <title>NEXUS GAMING — Intră în joc</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oxanium:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#home">GAME<span>-ZONE</span></a>
-    <nav>
-      <a href="#top">Top jocuri</a>
-      <a href="#categorii">Categorii</a>
-      <a href="#servere">Servere</a>
-      <a href="#despre">Despre</a>
+  <div class="noise"></div>
+  <header class="site-header">
+    <a class="brand" href="#acasa" aria-label="NEXUS GAMING — Acasă"><span class="brand-mark">N</span><span>NEXUS <b>GAMING</b></span></a>
+    <button class="menu-toggle" aria-label="Deschide meniul" aria-expanded="false">☰</button>
+    <nav class="main-nav" aria-label="Navigație principală">
+      <a class="active" href="#acasa">Acasă</a><a href="#jocuri">Jocuri</a><a href="#servere">Servere</a><a href="#comunitate">Comunitate</a>
     </nav>
-    <div class="account-actions"><a class="register-link" href="register.html">Înregistrare</a><button class="login-btn" id="loginBtn">Conectare</button></div>
+    <div class="header-actions">
+      <button class="icon-btn" id="profileBtn" aria-label="Deschide profilul">♙</button>
+      <button class="btn btn-small btn-ghost" data-modal="login">Autentificare</button>
+      <button class="btn btn-small btn-primary" data-modal="register">Înregistrare</button>
+    </div>
   </header>
 
-  <main id="home">
-    <section class="hero">
-      <div class="hero-content">
-        <span class="eyebrow">TOP GAMING ROMÂNIA</span>
-        <h1>Descoperă cele mai tari <span>jocuri online</span></h1>
-        <p>Votează jocurile preferate, vezi clasamentul comunității și găsește rapid jocuri FPS, MMORPG, MOBA, Battle Royale și multe altele.</p>
+  <main>
+    <section class="hero" id="acasa">
+      <div class="hero-glow"></div>
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> Comunitatea gamerilor din România</p>
+        <h1>INTRĂ ÎN <em>JOC.</em><br>RĂMÂI ÎN <span>NEXUS.</span></h1>
+        <p class="hero-text">Descoperă jocuri, găsește servere active și intră într-o comunitate construită pentru competiție, echipă și momente memorabile.</p>
         <div class="hero-actions">
-          <a class="primary" href="#top">Vezi clasamentul</a>
-          <a class="secondary" href="#categorii">Explorează categorii</a>
+          <a class="btn btn-primary btn-large" href="#jocuri">Explorează jocurile <span>→</span></a>
+          <a class="btn btn-ghost btn-large" href="#servere"><span class="pulse-dot"></span> Vezi serverele</a>
         </div>
+        <div class="hero-stats"><div><strong>12K+</strong><span>Membri activi</span></div><div><strong>48</strong><span>Servere online</span></div><div><strong>6</strong><span>Jocuri populare</span></div></div>
       </div>
-      <div class="hero-card">
-        <div class="rank-badge">#1</div>
-        <div>
-          <small>Jocul săptămânii</small>
-          <h2>Counter-Strike 2</h2>
-          <p>FPS competitiv • Valve</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="stats">
-      <div><strong>50+</strong><span>Jocuri listate</span></div>
-      <div><strong>8</strong><span>Categorii</span></div>
-      <div><strong id="totalVotes">12.480</strong><span>Voturi comunitate</span></div>
-      <div><strong>24/7</strong><span>Top actualizat</span></div>
-    </section>
-
-    <section class="section" id="top">
-      <div class="section-head">
-        <div><span class="eyebrow">CLASAMENT</span><h2>Top jocuri online</h2></div>
-        <input id="searchInput" class="search" type="search" placeholder="Caută un joc..." />
-      </div>
-      <div id="gameGrid" class="game-grid"></div>
-    </section>
-
-    <section class="section" id="categorii">
-      <div class="section-head"><div><span class="eyebrow">GENURI</span><h2>Categorii populare</h2></div></div>
-      <div class="category-grid" id="categoryGrid"></div>
-    </section>
-
-    <section class="section" id="servere">
-      <div class="section-head"><div><span class="eyebrow">SERVER LIST</span><h2>Servere recomandate</h2></div></div>
-      <div class="server-list">
-        <article><div><span class="online-dot"></span><strong>CS2 Arena Romania</strong><small>Counter-Strike 2</small></div><span>128/128</span><button onclick="copyIP('play.game-zone.ro:27015')">Copiază IP</button></article>
-        <article><div><span class="online-dot"></span><strong>Old School Public</strong><small>Counter-Strike 1.6</small></div><span>29/32</span><button onclick="copyIP('cs.game-zone.ro:27015')">Copiază IP</button></article>
-        <article><div><span class="online-dot"></span><strong>Metin2 Legends</strong><small>Metin2</small></div><span>842 online</span><button onclick="copyIP('metin.game-zone.ro')">Copiază adresă</button></article>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="core"><span>N</span></div>
+        <div class="floating-card fc-one"><small>ÎN JOC ACUM</small><strong>3.284 jucători</strong></div>
+        <div class="floating-card fc-two"><span class="live"></span><div><small>SERVER STATUS</small><strong>Toate sistemele active</strong></div></div>
       </div>
     </section>
 
-    <section class="section about" id="despre">
-      <span class="eyebrow">GAME-ZONE</span>
-      <h2>Un singur loc pentru comunitatea de gaming</h2>
-      <p>Game-Zone este construit ca portal pentru topuri de jocuri, servere online, voturi și descoperirea jocurilor preferate de comunitate.</p>
+    <section class="section" id="jocuri">
+      <div class="section-head"><div><p class="eyebrow">ALEGE-ȚI ARENA</p><h2>Jocuri <span>populare</span></h2></div><p>De la shootere tactice la lumi deschise — găsește-ți echipa și pornește aventura.</p></div>
+      <div class="games-grid">
+        <article class="game-card featured" data-game="CS2"><div class="game-art art-cs2"><span class="game-index">01</span><div class="art-title">CS<span>2</span></div></div><div class="game-info"><div><span class="tag">FPS TACTIC</span><h3>Counter-Strike 2</h3><p>Precizie, strategie și adrenalină pură.</p></div><button class="round-btn" aria-label="Vezi Counter-Strike 2">↗</button></div></article>
+        <article class="game-card" data-game="PUBG"><div class="game-art art-pubg"><span class="game-index">02</span><div class="art-title">PUBG</div></div><div class="game-info"><div><span class="tag">BATTLE ROYALE</span><h3>PUBG: Battlegrounds</h3><p>Supraviețuiește. Luptă. Câștigă.</p></div><button class="round-btn" aria-label="Vezi PUBG">↗</button></div></article>
+        <article class="game-card" data-game="GTA V"><div class="game-art art-gta"><span class="game-index">03</span><div class="art-title">GT<span>A</span> V</div></div><div class="game-info"><div><span class="tag">OPEN WORLD</span><h3>Grand Theft Auto V</h3><p>Los Santos te așteaptă.</p></div><button class="round-btn" aria-label="Vezi GTA V">↗</button></div></article>
+        <article class="game-card" data-game="Free Fire"><div class="game-art art-ff"><span class="game-index">04</span><div class="art-title">FREE<br><span>FIRE</span></div></div><div class="game-info"><div><span class="tag">MOBILE ROYALE</span><h3>Garena Free Fire</h3><p>Lupte rapide. Victorii spectaculoase.</p></div><button class="round-btn" aria-label="Vezi Free Fire">↗</button></div></article>
+        <article class="game-card" data-game="Fortnite"><div class="game-art art-fortnite"><span class="game-index">05</span><div class="art-title">FORT<span>NITE</span></div></div><div class="game-info"><div><span class="tag">BATTLE ROYALE</span><h3>Fortnite</h3><p>Construiește-ți drumul spre victorie.</p></div><button class="round-btn" aria-label="Vezi Fortnite">↗</button></div></article>
+        <article class="game-card" data-game="Metin2"><div class="game-art art-metin"><span class="game-index">06</span><div class="art-title">METIN<span>2</span></div></div><div class="game-info"><div><span class="tag">MMORPG</span><h3>Metin2</h3><p>Legendele nu se nasc. Se forjează.</p></div><button class="round-btn" aria-label="Vezi Metin2">↗</button></div></article>
+      </div>
     </section>
+
+    <section class="section servers-section" id="servere">
+      <div class="section-head"><div><p class="eyebrow"><span class="pulse-dot"></span> LIVE ACUM</p><h2>Servere <span>online</span></h2></div><button class="btn btn-ghost" id="refreshServers">↻ Actualizează</button></div>
+      <div class="server-table">
+        <div class="server-row table-head"><span>Server</span><span>Joc</span><span>Jucători</span><span>Hartă / Mod</span><span>Status</span><span></span></div>
+        <div class="server-row"><div class="server-name"><i class="status-dot"></i><div><strong>NEXUS.RO #1</strong><small>5 ms ping</small></div></div><span>CS2</span><span><b>28</b> / 32</span><span>de_mirage</span><span class="status-online">ONLINE</span><button class="join-btn">Intră</button></div>
+        <div class="server-row"><div class="server-name"><i class="status-dot"></i><div><strong>NEXUS PUBG RO</strong><small>12 ms ping</small></div></div><span>PUBG</span><span><b>76</b> / 100</span><span>Erangel</span><span class="status-online">ONLINE</span><button class="join-btn">Intră</button></div>
+        <div class="server-row"><div class="server-name"><i class="status-dot"></i><div><strong>NEXUS ROLEPLAY</strong><small>9 ms ping</small></div></div><span>GTA V</span><span><b>184</b> / 250</span><span>Roleplay RO</span><span class="status-online">ONLINE</span><button class="join-btn">Intră</button></div>
+        <div class="server-row"><div class="server-name"><i class="status-dot"></i><div><strong>METIN NEXUS</strong><small>15 ms ping</small></div></div><span>Metin2</span><span><b>421</b> / 1000</span><span>Regatul Albastru</span><span class="status-online">ONLINE</span><button class="join-btn">Intră</button></div>
+      </div>
+    </section>
+
+    <section class="community" id="comunitate"><div><p class="eyebrow">URMĂTORUL NIVEL</p><h2>Nu juca singur.<br><span>Intră în comunitate.</span></h2><p>Creează-ți profilul, găsește coechipieri și participă la evenimentele NEXUS GAMING.</p></div><button class="btn btn-primary btn-large" data-modal="register">Creează cont gratuit →</button></section>
   </main>
 
-  <footer>© 2026 Game-Zone • Top jocuri online</footer>
+  <footer><a class="brand" href="#acasa"><span class="brand-mark">N</span><span>NEXUS <b>GAMING</b></span></a><p>© 2026 NEXUS GAMING. Creat pentru gameri.</p><div><a href="#jocuri">Jocuri</a><a href="#servere">Servere</a><a href="#comunitate">Comunitate</a></div></footer>
 
-  <div class="toast" id="toast">Copiat!</div>
+  <div class="modal" id="authModal" aria-hidden="true"><div class="modal-backdrop" data-close></div><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" data-close aria-label="Închide">×</button><span class="brand-mark modal-logo">N</span><p class="eyebrow" id="modalEyebrow">BINE AI REVENIT</p><h2 id="modalTitle">Intră în <span>NEXUS</span></h2><p id="modalText">Conectează-te pentru a continua aventura.</p><form id="authForm"><label id="nameField">Nume de utilizator<input name="username" autocomplete="username" placeholder="numele_tău"></label><label>Email<input type="email" required placeholder="gamer@email.ro"></label><label>Parolă<input type="password" required minlength="6" placeholder="••••••••"></label><button class="btn btn-primary" type="submit" id="submitAuth">Autentificare →</button></form><button class="switch-auth" id="switchAuth">Nu ai cont? <b>Înregistrează-te</b></button></div></div>
 
-  <div class="modal" id="loginModal" aria-hidden="true">
-    <div class="modal-card">
-      <button class="close" id="closeModal">×</button>
-      <span class="eyebrow">CONT GAME-ZONE</span>
-      <h2>Conectare</h2>
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Parolă" />
-      <button class="primary full" id="demoLogin">Intră în cont</button>
-      <p class="auth-switch">Nu ai cont? <a href="register.html">Creează unul acum</a></p><p class="muted">Demo vizual. Conectarea reală se poate lega ulterior la Supabase.</p>
-    </div>
-  </div>
-
+  <aside class="profile-panel" id="profilePanel" aria-hidden="true"><button class="modal-close" id="closeProfile" aria-label="Închide">×</button><div class="avatar">NR</div><p class="eyebrow">PROFIL JUCĂTOR</p><h2>NexusRookie</h2><span class="rank">NIVEL 12</span><div class="profile-stat"><span>XP până la nivelul următor</span><b>2.480 / 3.000</b><i><em></em></i></div><div class="profile-grid"><div><strong>38</strong><span>Meciuri</span></div><div><strong>14</strong><span>Victorii</span></div><div><strong>5</strong><span>Prieteni</span></div></div><button class="btn btn-ghost">Editează profilul</button></aside>
+  <div class="toast" id="toast" role="status"></div>
   <script src="app.js"></script>
 </body>
 </html>
